@@ -1,0 +1,38 @@
+package src;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+
+
+public class StockTradingDay {
+	
+	static final private int TradeMinutes = (int) (6.5 * 60);
+	static final private int StartMinute = 9*60+30;
+
+	private Quote quotes[] = new Quote[TradeMinutes] ;
+	
+	final public Calendar date;
+	
+	StockTradingDay(Calendar _date)
+	{
+		this.date=_date;
+	}
+	
+	public void set_new_quote(Calendar _date, Quote _quote) throws Exception
+	{
+		if (_date.get(Calendar.DAY_OF_YEAR) == this.date.get(Calendar.DAY_OF_YEAR) &&
+				_date.get(Calendar.DAY_OF_MONTH) == this.date.get(Calendar.DAY_OF_MONTH) &&
+				_date.get(Calendar.DATE) == this.date.get(Calendar.DATE) )
+		{
+			int idx =  _date.get(Calendar.HOUR_OF_DAY)*60 + _date.get(Calendar.MINUTE) - StartMinute;
+			
+			quotes[idx] = _quote;
+		}
+		else 
+			throw new Exception("Can't add quote to different date ");
+	}
+	
+	
+	
+}

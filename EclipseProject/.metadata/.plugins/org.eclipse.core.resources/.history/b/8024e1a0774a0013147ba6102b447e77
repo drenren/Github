@@ -1,0 +1,17 @@
+package src;
+
+public class Quote {
+		final public double open;
+		final public double close;
+		final public double high;
+		final public double low;
+		final public int vol;
+		Quote(double _open, double _close, double _high, double _low, int _vol )
+		{
+			this.open = _open;
+			this.close= _close;
+			this.high = _high;
+			this.low = _low;
+			this.vol = _vol;
+		}
+};

@@ -1,0 +1,7 @@
+package src;
+
+public class StockTradingDay {
+	final private int TradeMinutes = 6*60;
+	private Quote quotes[] = new Quote[TradeMinutes] ;
+	
+}

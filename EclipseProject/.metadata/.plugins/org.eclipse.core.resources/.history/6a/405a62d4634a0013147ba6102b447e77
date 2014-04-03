@@ -1,0 +1,27 @@
+package src;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+public class StockTradingDay {
+	final private int TradeMinutes = 13 * 30;
+	// default date format 
+	final private SimpleDateFormat DateFormate = new SimpleDateFormat("yyyyMMdd");
+	private Quote quotes[] = new Quote[TradeMinutes] ;
+	
+	final public Date date;
+	
+	StockTradingDay(Date _date)
+	{
+		this.date=_date;
+	}
+	
+	public void add_new_quote(Date _date, Quote _quote)
+	{
+		if (0)
+			throw new Exception("Can't add quote to different date ")
+	}
+	
+	
+	
+}

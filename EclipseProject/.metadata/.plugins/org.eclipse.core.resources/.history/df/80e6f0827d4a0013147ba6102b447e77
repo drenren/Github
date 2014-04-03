@@ -1,0 +1,56 @@
+package src;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
+
+
+public class StockDBFeed extends StockDataFeed {
+		private Connection connect = null;
+		private ResultSet resultSet = null;
+		private PreparedStatement preparedStatement = null;
+				
+		public StockDBFeed(String _host, String _user, String _pw, String _defaultdb) throws ClassNotFoundException, SQLException
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			 String url = "jdbc:mysql://"+_host+":3306/"+_defaultdb;
+			 connect = DriverManager.getConnection(url,_user,_pw);
+			 
+			 preparedStatement=connect.prepareStatement("select * from MktData.DowJonesMinuteHistory where Ticker in (?) and Date in (?)");
+			 
+		}
+		
+		public void subscrible(String _ticker, Calendar _date) throws Exception
+		{
+			
+			preparedStatement.setString(1, _ticker);
+			preparedStatement.setDate(2, new java.sql.Date(_date.getTimeInMillis()));
+			
+			resultSet = preparedStatement.executeQuery();
+		}
+		
+		public Quote get_next_quote() throws Exception
+		{
+			while (resultSet.next())
+			{
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(resultSet.getDate("Time"));
+				
+				return new Quote( cal, 
+								 resultSet.getString("Ticker"),
+								 resultSet.getDouble("Open"),
+								 resultSet.getDouble("Close"),
+								 resultSet.getDouble("High"),
+								 resultSet.getDouble("Low"),
+								 resultSet.getInt("Volumne"));
+			}
+			return null;
+		} 
+		
+ 
+}

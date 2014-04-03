@@ -1,0 +1,13 @@
+package src;
+
+import java.util.Date;
+
+public class Quote {
+		public double open;
+		public double close;
+		public double high;
+		public double low;
+		public double vol;
+		public String ticker;
+		public Date DateTime;
+};

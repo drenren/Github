@@ -1,0 +1,10 @@
+package src;
+
+
+
+public class StockDataFeed {
+	Quote get_next_quote() throws Exception
+	{
+		throw new Exception("StockDateFeed::get_next_quote invalid call to the base method");
+	}
+}

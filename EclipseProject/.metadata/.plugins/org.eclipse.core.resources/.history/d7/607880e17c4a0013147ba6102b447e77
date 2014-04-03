@@ -1,0 +1,33 @@
+import java.sql.SQLException;
+import java.util.Calendar;
+
+import src.Quote;
+import src.StockDBFeed;
+import src.StockDataFeed;
+
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		StockDataFeed feed= new StockDBFeed(	
+								"ec2-54-227-237-63.compute-1.amazonaws.com",
+								"rdong",
+								"atom2415",
+								"mysql"
+							);
+		
+		Calendar date= Calendar.getInstance();
+		date.set(2013, 5, 1);
+		feed.subscrible("AA", date);
+		Quote quote;
+		while ((quote=feed.get_next_quote())!= null )
+		{
+			
+		}
+	}
+
+}
+
+
+
